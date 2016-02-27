@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script src="https://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+
+				</div>
+				<div class="col-md-6 well">
+					<h2>Let us know your thoughts about the workshop. <small>And help us conduct better events.</small></h2>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="name">Name <small>(Optional)</small></label>
+							<input type="text" id="name" class=" form-control input-sm" placeholder="Name">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="email">Email <small>(Optional)</small></label>
+							<input type="text" id="email" class=" form-control input-sm" placeholder="Name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="questionOne">How was your overall experience of this workshop?</label>
+						<select id="questionOne" class="  form-control input-sm">
+							<option value="bad">Bad</option>
+							<option value="average" selected="selected">Average</option>
+							<option value="good">Good</option>
+							<option value="awesome">Awesome</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="questionTwo">What is your opinion about the quality of teaching?</label>
+						<select id="questionTwo" class=" form-control input-sm">
+							<option value="I can teach better">I can teach better</option>
+							<option value="Boring">Boring</option>
+							<option value="Can't Complain">Can't Complain</option>
+							<option value="Pretty Good" selected="selected">Pretty Good</option>
+							<option value="awesome">Awesome!</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="questionThree">How well do you think this workshop was organised?</label>
+						<select id="questionThree" class=" form-control input-sm">
+							<option value="It was a disaster">It was a disaster</option>
+							<option value="Barely there">Barely there</option>
+							<option value="Can't Complain">Can't Complain</option>
+							<option value="Smooth" selected="selected">Smooth</option>
+							<option value="As professional as it can get.">As professional as it can get.</option>
+						</select>
+					</div>
+					
+					<div class="form-group">
+						<label for="questionFour">What other topics would you like us to arrange workshops about? <br> What other kind of events would you like us to organise?</label>
+						<textarea name="" id="questionFour" class="col-md-12 col-xs-12" rows="5" style="margin-bottom: 20px;"></textarea>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-6">
+							<button type="submit" class="btn btn-info" id="submitFinal">Submit My Feedback</button>
+							<br>
+							<strong><small>A proud CSI Atharva initiative</small></strong>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		var ref = new Firebase("https://blistering-inferno-5379.firebaseio.com/userdata/questions");
+		$('#submitFinal').click(function(){
+
+			if ($('#name').val() == ""){
+				var name = 'Guest' + Math.floor(Math.random() * 101);	
+			}else{
+				var name = $('#name').val();
+			};
+			var questionOne = $('#questionOne').val();
+			var email = $('#email').val();
+			var questionOne = $('#questionOne').val();
+			var questionTwo = $('#questionTwo').val();
+			var questionThree = $('#questionThree').val();
+			var questionFour = $('#questionFour').val();
+
+			ref.push({
+				One: name,
+				email: email,
+				questionOne: questionOne,
+				questionTwo: questionTwo,
+				questionThree: questionThree,
+				questionFour: questionFour,
+			});
+		});
+	</script>
+</html>

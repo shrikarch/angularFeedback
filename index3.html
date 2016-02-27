@@ -1,0 +1,62 @@
+<html ng-app="feedBackApp">
+	<head>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
+		<script src="https://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
+		<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+	</head>
+	<body ng-controller="feedbackController">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div id="comments">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Email</th>
+										<th>Question One</th>
+										<th>Question Two</th>
+										<th>Question Three</th>
+										<th style="width:350px;">Question Four</th>
+									</tr>
+								</thead>
+								<tbody class="comment" ng-repeat="comment in comments">
+									<tr class="animated flipInX">
+										<td>{{comment.One}}</td>
+										<td>{{comment.email}}</td>
+										<td>{{comment.questionOne}}</td>
+										<td>{{comment.questionTwo}}</td>
+										<td>{{comment.questionThree}}</td>
+										<td style="width:350px;">{{comment.questionFour}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			/*
+      var app = angular.module("feedBackApp", ["firebase"]);
+      function MyController($scope, $firebase) {
+        var ref = new Firebase("https://blistering-inferno-5379.firebaseio.com/userdata/questions");
+        $scope.messages = $firebase(ref).$asArray();
+        $scope.addMessage = function(e) {
+          $scope.messages.$add({from: $scope.name, body: $scope.msg});
+          $scope.msg = "";
+        }
+      }*/
+
+			angular.module("feedBackApp", ["firebase"]).controller(
+				"feedbackController",["$scope","$firebase",function($scope, $firebase){
+					var ref = new Firebase("https://blistering-inferno-5379.firebaseio.com/userdata/questions");
+					$scope.comments = $firebase(ref).$asArray();
+				}]);
+		</script>
+	</body>
+</html>
